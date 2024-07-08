@@ -2,6 +2,7 @@
 
 import { navLinks } from "@/constants";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 const Header = () => {
@@ -64,7 +65,7 @@ const Header = () => {
               );
             })}
           </ul>
-          <div className=" bg-[#F2E2D4] rounded-[5px] h-[60px] w-[60px] flex items-center justify-center">
+          <Link className=" bg-[#F2E2D4] hover:bg-[#F2E2D4]/50 rounded-[5px] h-[60px] w-[60px] flex items-center justify-center" href="/cart">
             <Image
               src="/icons/cart.svg"
               width={39}
@@ -72,7 +73,7 @@ const Header = () => {
               alt="cart"
               className="cursor-pointer"
             />
-          </div>
+          </Link>
         </div>
       </section>
     </>

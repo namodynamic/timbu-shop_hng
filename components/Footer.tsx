@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { footerLinks } from "../constants";
 
 const Footer = () => {
@@ -36,9 +37,9 @@ const Footer = () => {
                     {section.links.map((link) => (
                       <li
                         key={link.name}
-                        className="mt-3 text-white-400 font-montserrat text-white text-base leading-normal hover:text-slate-gray cursor-pointer"
+                        className="mt-3 text-white-400 font-montserrat text-white hover:text-[#D4A373] text-base leading-normal hover:text-slate-gray cursor-pointer"
                       >
-                        <a href="#">{link.name}</a>
+                        <Link href={link.link}>{link.name}</Link>
                       </li>
                     ))}
                   </ul>

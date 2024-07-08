@@ -108,9 +108,9 @@ export const footerLinks = [
   {
     title: "Social Media:",
     links: [
-      { name: "Instagram", link: "/" },
-      { name: "Facebook", link: "/" },
-      { name: "Twitter", link: "/" },
+      { name: "Instagram", link: "www.instagram.com" },
+      { name: "Facebook", link: "www.facebook.com" },
+      { name: "Twitter", link: "www.twitter.com" },
       
     ],
   },
@@ -118,9 +118,9 @@ export const footerLinks = [
     title: "About",
     links: [
       { name: "Home", link: "/" },
-      { name: "Product", link: "/" },
-      { name: "Checkout", link: "/" },
-      { name: "Cart", link: "/" },
+      { name: "Products", link: "/products" },
+      { name: "Checkout", link: "/checkout" },
+      { name: "Cart", link: "/cart" },
     ],
   },
   
