@@ -3,11 +3,11 @@
 import { navLinks } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
-  const router = useRouter();
   const pathname = usePathname();
+  const isActive = pathname === "/cart";
 
   return (
     <>
@@ -65,15 +65,34 @@ const Header = () => {
               );
             })}
           </ul>
-          <Link className=" bg-[#F2E2D4] hover:bg-[#F2E2D4]/50 rounded-[5px] h-[60px] w-[60px] flex items-center justify-center" href="/cart">
-            <Image
-              src="/icons/cart.svg"
-              width={39}
-              height={30}
-              alt="cart"
-              className="cursor-pointer"
-            />
-          </Link>
+
+          {isActive ? (
+            <Link
+              className=" bg-[#D4A373] hover:bg-[#D4A373]/50 rounded-[5px] h-[60px] w-[60px] flex items-center justify-center"
+              href="/cart"
+            >
+              <Image
+                src="/icons/cart-active.svg"
+                width={39}
+                height={30}
+                alt="cart"
+                className="cursor-pointer"
+              />
+            </Link>
+          ) : (
+            <Link
+              className=" bg-[#F2E2D4] hover:bg-[#F2E2D4]/50 rounded-[5px] h-[60px] w-[60px] flex items-center justify-center"
+              href="/cart"
+            >
+              <Image
+                src="/icons/cart.svg"
+                width={39}
+                height={30}
+                alt="cart"
+                className="cursor-pointer"
+              />
+            </Link>
+          )}
         </div>
       </section>
     </>

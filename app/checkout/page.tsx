@@ -111,7 +111,7 @@ const Checkout = () => {
             </div>
 
             <Link
-              href="/"
+              href="/confirmation"
               className="font-manrope max-sm:hidden text-[16px] w-full px-10 py-2 border rounded-md mt-10 bg-[#D4A373] hover:bg-[#D4A373]/70 flex justify-center items-center font-bold leading-[21.86px] text-[#fff] text-center"
             >
               Proceed
