@@ -5,7 +5,10 @@ const Cart = () => {
   return (
     <section className="flex flex-col min-h-screen">
       <div className="wrapper">
-        <table className="w-full text-sm text-left ">
+      <Link href="/products" >
+        <Image src="/icons/backicon.svg" width={30} height={30} alt="back" />
+      </Link>
+        <table className="w-full mt-10 text-sm text-left ">
           <thead className="text-md text-white bg-[#A3D9A5]">
             <tr>
               <th scope="col" className="px-6 py-3">
