@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="overflow-x-hidden">
         <Header />
         <main className={manrope.className}>{children}</main>
         <Footer />

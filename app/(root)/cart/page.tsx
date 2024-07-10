@@ -38,6 +38,7 @@ const Cart = () => {
         <Link href="/products">
           <Image src="/icons/backicon.svg" width={30} height={30} alt="back" />
         </Link>
+        <div className="overflow-x-auto">
         <table className="w-full mt-10 text-sm text-left ">
           <thead className="text-md text-white bg-[#A3D9A5]">
             <tr>
@@ -99,6 +100,7 @@ const Cart = () => {
             ))}
           </tbody>
         </table>
+        </div>
 
         <div className="flex justify-between mt-10 text-bold sm:px-40 text-[#8D7A6B]">
           <p>Sum Total</p>
