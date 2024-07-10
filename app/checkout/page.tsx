@@ -4,7 +4,7 @@ import Link from "next/link";
 const Checkout = () => {
   return (
     <section className="min-h-screen mt-20 wrapper">
-      <Link href="/">
+      <Link href="/cart">
         <Image src="/icons/backicon.svg" width={30} height={30} alt="back" />
       </Link>
       <div className="flex flex-col items-center">
@@ -156,7 +156,7 @@ const Checkout = () => {
         </div>
 
         <Link
-          href="/"
+          href="/confirmation"
           className="font-manrope text-[16px] sm:hidden w-full px-10 py-2 border rounded-md mt-10 bg-[#D4A373] hover:bg-[#D4A373]/70 flex justify-center items-center font-bold leading-[21.86px] text-[#fff] text-center"
         >
           Proceed
