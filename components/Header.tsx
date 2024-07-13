@@ -1,6 +1,7 @@
 "use client";
 
 import { navLinks } from "@/constants";
+import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,6 +9,10 @@ import { usePathname } from "next/navigation";
 const Header = () => {
   const pathname = usePathname();
   const isActive = pathname === "/cart";
+  const { cartItems } = useCart(); 
+
+  // Calculate total items in cart
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <>
@@ -78,6 +83,11 @@ const Header = () => {
                 alt="cart"
                 className="cursor-pointer"
               />
+               {totalItems > 0 && (
+              <span className=" right-0 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
             </Link>
           ) : (
             <Link
@@ -91,6 +101,11 @@ const Header = () => {
                 alt="cart"
                 className="cursor-pointer"
               />
+               {totalItems > 0 && (
+              <span className="top-10 right-0 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
             </Link>
           )}
         </div>

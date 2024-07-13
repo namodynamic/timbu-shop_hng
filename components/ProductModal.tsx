@@ -5,6 +5,7 @@ import { cn, formatAmount } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { FaRegHeart } from "react-icons/fa";
 import ModalCard from "./ModalCard";
+import { useCart } from "@/context/CartContext";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -19,6 +20,8 @@ interface ProductModalProps {
 }
 
 const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
+    const { addToCart } = useCart();
+
   const [bigPhoto, setBigPhoto] = useState<string>(
     product ? product.photos[0] : ""
   );
@@ -33,6 +36,12 @@ const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
   const changeBigProductPhoto = (photo: string) => {
     setBigPhoto(photo);
   };
+
+  const handleAddToCart = () => {
+    addToCart(product as any);
+    onClose(); 
+  };
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -73,7 +82,7 @@ const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
           <p>Rating: ⭐⭐⭐⭐</p>
 
           <div className="flex gap-2">
-            <Button size="sm">Add to Cart</Button>
+            <Button size="sm" onClick={handleAddToCart}>Add to Cart</Button>
             <Button variant="outline" size="sm">
               <FaRegHeart className="w-4 h-4 mr-2" />
               Wishlist
