@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Pagination } from "./Pagination";
+import Loader from "./Loader";
 
 interface Product {
   id: string;
@@ -12,14 +15,28 @@ interface Product {
   photos: string[];
 }
 
-const ProductList: React.FC = () => {
+interface ProductListProps {
+  initialProducts: Product[];
+  initialPage: number;
+  initialTotalPages: number;
+}
+
+const ProductList: React.FC<ProductListProps> = ({
+  initialProducts,
+  initialPage,
+  initialTotalPages,
+}) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(initialPage);
+  const [totalPages, setTotalPages] = useState<number>(initialTotalPages);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("/api/products");
+        const res = await fetch(`/api/products?page=${page}`);
         if (!res.ok) {
           throw new Error("Failed to fetch products");
         }
@@ -42,8 +59,8 @@ const ProductList: React.FC = () => {
           ),
         }));
 
-        console.log(productsData);
         setProducts(productsData);
+        setTotalPages(Math.ceil(data.total / 10));
       } catch (error) {
         console.error("Failed to fetch products:", error);
       } finally {
@@ -52,17 +69,35 @@ const ProductList: React.FC = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [page]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("page", newPage.toString());
+    router.push(newUrl.toString(), { scroll: false });
+  };
+
   return (
-    <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 sm:gap-4 gap-5 place-items-center">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div>
+      <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 sm:gap-4 gap-5 place-items-center">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+      {totalPages > 1 && (
+        <div className="my-4 w-full">
+          <Pagination
+            totalPages={totalPages}
+            page={page}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 };

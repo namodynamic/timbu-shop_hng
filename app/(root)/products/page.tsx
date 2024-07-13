@@ -1,12 +1,30 @@
+import { Pagination } from "@/components/Pagination";
 import ProductCard from "@/components/ProductCard";
 import ProductList from "@/components/ProductList";
 import { bestSellers, products } from "@/constants";
+
+interface Product {
+  id: string;
+  name: string;
+  description: string | null;
+  availability_quantity: number;
+  current_price: number;
+  photos: string[];
+}
+const initialProducts: Product[] = [];
+const initialPage = 1;
+const initialTotalPages = 10;
 
 const Products = () => {
   return (
     <section className="flex 1min-h-screen flex-col mb-20 items-center justify-center">
       <div className="wrapper">
-        <ProductList />
+        <ProductList
+          initialProducts={initialProducts}
+          initialPage={initialPage}
+          initialTotalPages={initialTotalPages}
+        />
+
         <div className="mt-10">
           <h2 className="font-manrope text-lg font-bold leading-[27.32px] text-left text-[#8D7A6B]">
             Best Sellers
