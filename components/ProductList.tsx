@@ -104,12 +104,13 @@ const ProductList: React.FC<ProductListProps> = ({
             <ProductCard product={product} />
           </div>
         ))}
-
-        <ProductModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          product={selectedProduct}
-        />
+        <div className="justify-center items-center">
+          <ProductModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            product={selectedProduct}
+          />
+        </div>
       </div>
       {totalPages > 1 && (
         <div className="my-4 w-full">

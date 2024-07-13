@@ -20,7 +20,7 @@ interface ProductModalProps {
 }
 
 const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
-    const { addToCart } = useCart();
+  const { addToCart } = useCart();
 
   const [bigPhoto, setBigPhoto] = useState<string>(
     product ? product.photos[0] : ""
@@ -39,14 +39,13 @@ const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
 
   const handleAddToCart = () => {
     addToCart(product as any);
-    onClose(); 
+    onClose();
   };
-
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-full max-sm:h-screen max-w-[520px]">
-        <div className="grid gap-4">
+      <DialogContent className="w-full max-sm:h-[90%] max-w-[520px]">
+        <div className="grid max-sm:gap-[2px]">
           <div>
             {product.photos[0] && (
               <div className="flex justify-center">
@@ -82,7 +81,9 @@ const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
           <p>Rating: ⭐⭐⭐⭐</p>
 
           <div className="flex gap-2">
-            <Button size="sm" onClick={handleAddToCart}>Add to Cart</Button>
+            <Button size="sm" onClick={handleAddToCart}>
+              Add to Cart
+            </Button>
             <Button variant="outline" size="sm">
               <FaRegHeart className="w-4 h-4 mr-2" />
               Wishlist
