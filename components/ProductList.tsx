@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Pagination } from "./Pagination";
 import Loader from "./Loader";
+import ProductModal from "./ProductModal";
 
 interface Product {
   id: string;
@@ -30,6 +31,10 @@ const ProductList: React.FC<ProductListProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(initialPage);
   const [totalPages, setTotalPages] = useState<number>(initialTotalPages);
+
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -75,6 +80,16 @@ const ProductList: React.FC<ProductListProps> = ({
     return <Loader />;
   }
 
+  const handleProductClick = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
+
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
     const newUrl = new URL(window.location.href);
@@ -86,8 +101,16 @@ const ProductList: React.FC<ProductListProps> = ({
     <div>
       <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 sm:gap-4 gap-5 place-items-center">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <div key={product.id} onClick={() => handleProductClick(product)}>
+            <ProductCard product={product} />
+          </div>
         ))}
+
+        <ProductModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          product={selectedProduct}
+        />
       </div>
       {totalPages > 1 && (
         <div className="my-4 w-full">
