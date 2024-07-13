@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Pagination } from "./Pagination";
 import Loader from "./Loader";
 import ProductModal from "./ProductModal";
@@ -36,7 +36,6 @@ const ProductList: React.FC<ProductListProps> = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
