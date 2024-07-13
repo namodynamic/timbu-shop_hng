@@ -4,3 +4,8 @@ declare type ProductProps = {
     price: string;
     availability: string;
 }
+
+declare interface PaginationProps {
+    page: number;
+    totalPages: number;
+  }
